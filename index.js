@@ -2,7 +2,11 @@
 const express = require("express");
 const helmet = require("helmet");
 const app = express();
+const port = process.env.PORT || 3002;
 
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 // Heroku deployment
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
@@ -14,8 +18,6 @@ if (process.env.NODE_ENV === "production") {
 // Use helmet
 app.use(helmet());
 
-const port = process.env.PORT || 8080;
-
 // file reader
 const fs = require("fs");
 
@@ -23,10 +25,6 @@ const fs = require("fs");
 const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
 
 app.get("/", (req, res) => {
   res.send({ msg: "welcome to muneeb's backend" });
