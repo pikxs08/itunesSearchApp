@@ -6,9 +6,12 @@ const port = process.env.PORT || 3002;
 const compression = require('compression');
 app.use(compression());
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+
+
+// Use helmet
+app.use(helmet());
+
+
 // Heroku deployment
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "frontend/build")));
@@ -17,8 +20,9 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-// Use helmet
-app.use(helmet());
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 
 // file reader
 const fs = require("fs");
