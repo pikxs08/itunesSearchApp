@@ -3,10 +3,6 @@ const express = require("express");
 const helmet = require("helmet");
 const app = express();
 const port = process.env.PORT || 3002;
-const compression = require('compression');
-app.use(compression());
-
-
 
 // Use helmet
 app.use(helmet());
